@@ -49,8 +49,13 @@
 
 (define all (union upper-case-magnets (move lower-case-magnets [0 0 -20])))
 
-;(difference lower-case (magnets 88))
-all
+;all
+
+(define upper-print (move upper-case-magnets [0 0 -90]))
+(define lower-print (move (reflect-z lower-case-magnets) [0 80 90]))
+(define print (union upper-print lower-print))
+
+print
 
 ;; Constructive solid geometry (CSG)
 ;; operations can be peformed using the libfive
