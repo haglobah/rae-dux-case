@@ -17,12 +17,11 @@
 ;; Shapes are defined in this pane, and rendered
 ;; on the right.  You can start with shapes from
 ;; the standard library, e.g.
-(define keebs
-  (union (rounded-box [0 0 0] [150 20 110] 0.3)
-         (move (rounded-box [0 0 0] [150 20 110] 0.3) [0 25 0])))
+(define keeb-box (rounded-box [0 0 0] [150 20 110] 0.3))
+(define keeb keeb-box                     )
 
-(define case 
-  (rounded-box [0 0 0] [190 55 130] 0.5))
+(define keebs (union keeb (move keeb [0 25 0])))
+(define the-case (rounded-box [0 0 0] [190 55 130] 0.5))
 
 (define (cut-top elem)
   (difference elem (box [-20 -20 90] [200 100 150])))
@@ -31,18 +30,19 @@
   (difference elem (box [-20 -20 -10] [200 100 90])))
 
 (define (move-into keebs)
-  (move keebs [20 0 10]))
+  (move keebs [20 5 10]))
   
-(define lower (cut-top case))
+(define lower (cut-top the-case))
 
 (define lower-case (difference lower (move-into keebs)))
 
-(define upper (cut-bot case))
+(define upper (cut-bot the-case))
 
 (define upper-case (difference upper (move-into keebs)))
 
-upper-case
-(move lower-case [0 0 -20])
+(define all (union upper-case (move lower-case [0 0 -20])))
+
+;all
 
 ;; Constructive solid geometry (CSG)
 ;; operations can be peformed using the libfive
